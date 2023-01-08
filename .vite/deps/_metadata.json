@@ -1,13 +1,23 @@
 {
   "hash": "e31aeb0a",
-  "browserHash": "7cb3d861",
+  "browserHash": "05dec11d",
   "optimized": {
+    "mongodb": {
+      "src": "../../node_modules/.deno/mongodb@4.13.0/node_modules/mongodb/lib/index.js",
+      "file": "mongodb.js",
+      "fileHash": "909c5ce0",
+      "needsInterop": true
+    },
     "vue": {
       "src": "../../node_modules/.deno/vue@3.2.45/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "70ab3157",
+      "fileHash": "5f6d1b06",
       "needsInterop": false
     }
   },
-  "chunks": {}
+  "chunks": {
+    "chunk-TFWDKVI3": {
+      "file": "chunk-TFWDKVI3.js"
+    }
+  }
 }
