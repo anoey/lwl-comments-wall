@@ -9,7 +9,8 @@ router
   })
   .get("/api", async (context) => {
     context.response.body = await commentsCollection.find({}, {
-      limit: 20,
+      limit: parseInt(context.request.url.searchParams.get("limit") || "20"),
+      skip: parseInt(context.request.url.searchParams.get("skip") || "0"),
       sort: { time: -1 },
     }).toArray();
   });
