@@ -40,4 +40,11 @@ setInterval(async () => {
   padding: 50px 120px;
   overflow: hidden;
 }
+
+@media only screen and (max-device-width: 480px) {
+  .quene {
+    margin: 0;
+    padding: 25px 20px;
+  }
+}
 </style>

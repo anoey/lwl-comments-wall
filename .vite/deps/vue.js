@@ -1,5 +1,3 @@
-import "./chunk-TFWDKVI3.js";
-
 // node_modules/.deno/@vue+shared@3.2.45/node_modules/@vue/shared/dist/shared.esm-bundler.js
 function makeMap(str, expectsLowerCase) {
   const map2 = /* @__PURE__ */ Object.create(null);
