@@ -1,5 +1,5 @@
 <template>
-  <div class="quene">
+  <div v-on:click="pushNewComment" class="quene">
     <CommentVue :content="comment.content" :user="comment.user" :time="comment.time" v-for="comment in comments"
       :key="comment._id" />
   </div>
@@ -21,6 +21,17 @@ interface Comment {
 const comments: Ref<Array<Comment>> = ref(await getComments());
 const ONE_MINUTE = 60 * 1000;
 
+function pushNewComment() {
+  const comment: Comment = {
+    _id: Date.now().toString(),
+    content: "I'm a new comment",
+    user: 'new user',
+    time: Date.now()
+  };
+
+  comments.value = [comment, ...comments.value];
+}
+
 setInterval(async () => {
   let data = await getComments();
   data = data.filter((comment: Comment) => {
@@ -38,6 +49,8 @@ setInterval(async () => {
   padding: 10px;
   margin: 0 100px;
   padding: 50px 120px;
+  top: -190px;
+  position: relative;
   overflow: hidden;
 }
 

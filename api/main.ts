@@ -11,7 +11,7 @@ router
     context.response.body = await commentsCollection.find({}, {
       limit: 20,
       sort: { time: -1 },
-    }).toArray()
+    }).toArray();
   });
 
 const app = new Application();

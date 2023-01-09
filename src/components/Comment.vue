@@ -27,6 +27,18 @@ defineProps({
 article {
   font-family: 'Helvetica Neue', Helvetica, 'Lucida Grande', 'Lucida Sans Unicode', Arial, Verdana, sans-serif;
   padding-bottom: 50px;
+  animation: show 0.5s ease-in-out forwards;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(190px);
+  }
 }
 
 .header {
