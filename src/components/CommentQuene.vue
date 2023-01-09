@@ -10,7 +10,7 @@ import CommentVue from './Comment.vue';
 import { getComments } from '../Utils/getComments';
 import { getScrollHeight, getScrollTop, getWindowHeight } from '../Utils/screen';
 
-import { onMounted, onUnmounted, ref, Ref } from 'vue';
+import { onMounted, ref, Ref } from 'vue';
 
 interface Comment {
   _id: string;
@@ -20,11 +20,14 @@ interface Comment {
 }
 
 const comments: Ref<Array<Comment>> = ref(await getComments());
+const isLoad = ref(false);
 const ONE_MINUTE = 60 * 1000;
 
 async function loadMore() {
-  if (getScrollHeight() - getScrollTop() - getWindowHeight() < 100) {
+  if (getScrollTop() + getWindowHeight() >= getScrollHeight() - 100 && !isLoad.value) {
+    isLoad.value = true;
     comments.value = [...comments.value, ...(await getComments(undefined, comments.value.length))];
+    isLoad.value = false;
   }
 }
 
