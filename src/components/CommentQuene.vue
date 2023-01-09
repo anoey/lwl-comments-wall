@@ -1,5 +1,5 @@
 <template>
-  <div v-on:click="pushNewComment" class="quene">
+  <div class="quene">
     <CommentVue :content="comment.content" :user="comment.user" :time="comment.time" v-for="comment in comments"
       :key="comment._id" />
   </div>
@@ -8,8 +8,9 @@
 <script setup lang="ts">
 import CommentVue from './Comment.vue';
 import { getComments } from '../Utils/getComments';
+import { getScrollHeight, getScrollTop, getWindowHeight } from '../Utils/screen';
 
-import { Ref, ref } from 'vue';
+import { onMounted, onUnmounted, ref, Ref } from 'vue';
 
 interface Comment {
   _id: string;
@@ -21,16 +22,15 @@ interface Comment {
 const comments: Ref<Array<Comment>> = ref(await getComments());
 const ONE_MINUTE = 60 * 1000;
 
-function pushNewComment() {
-  const comment: Comment = {
-    _id: Date.now().toString(),
-    content: "I'm a new comment",
-    user: 'new user',
-    time: Date.now()
-  };
-
-  comments.value = [comment, ...comments.value];
+async function loadMore() {
+  if (getScrollHeight() - getScrollTop() - getWindowHeight() < 100) {
+    comments.value = [...comments.value, ...(await getComments(undefined, comments.value.length))];
+  }
 }
+
+onMounted(() => {
+  window.addEventListener('scroll', loadMore)
+});
 
 setInterval(async () => {
   let data = await getComments();
